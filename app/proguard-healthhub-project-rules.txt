@@ -1,0 +1,254 @@
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable,*Annotation*,Signature,EnclosingMethod
+-verbose
+#-dontshrink
+-libraryjars libs
+-ignorewarnings
+#-dontoptimize
+-keepattributes *Annotation*
+-keepattributes Exceptions
+-keepattributes InnerClasses
+
+#-repackageclasses 'myTestData'
+-flattenpackagehierarchy 'myTestData123'
+ -dontpreverify
+ -repackageclasses ''
+ -allowaccessmodification
+
+-keep class android.support.v4.** { *; }
+-keep interface android.support.v4.** { *; }
+-keep class android.support.v7.** { *; }
+-keep interface android.support.v7.** { *; }
+#-keep class android.support.v8.renderscript.** { *; }
+#-keep interface android.support.v8.renderscript.** { *; }
+-keep class android.support.v8.** { *; }
+-keep interface android.support.v8.** { *; }
+
+-keep class * extends android.app.Service { }
+-keep class * extends android.content.BroadcastReceiver {  }
+-keep class * extends android.content.ContentProvider {  }
+-keep class * extends android.support.v7.app.ActionBarActivity { }
+-keep class * extends android.support.v4.app.FragmentActivity { }
+-keep class * extends android.support.v4.app.Fragment { }
+-keep class * extends android.support.v7.app.FragmentActivity { }
+-keep class * extends android.support.v7.app.Fragment { }
+-keep class com.hh.healthhub.newActivity.views.fab.** { *; }
+-keep interface com.hh.healthhub.newActivity.views.fab.** { *; }
+-keep class com.hh.healthhub.newActivity.Beans.** {*;}
+
+-keep class com.nostra13.universalimageloader.** { *; }
+-keep interface com.nostra13.universalimageloader.** { *; }
+-keep class javax.annotation.** { *; }
+
+-keepclassmembers class javax.annotation.* { *; }
+
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembers class * { native <methods>; }
+
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+
+-keepclasseswithmembers class * {
+    public <init> (android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init> (android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class **.R$* { public static <fields>; }
+
+# activeandroid
+-keep class com.hh.healthhub.activeandroid.** { *; }
+-keep class com.hh.healthhub.activeandroid.**.** { *; }
+-keep class * extends com.hh.healthhub.activeandroid.Model
+-keep class * extends com.hh.healthhub.activeandroid.serializer.TypeSerializer
+
+-keepattributes Column
+-keepattributes Table
+-keepclasseswithmembers class * { @com.hh.healthhub.activeandroid.annotation.Column <fields>; }
+
+# Parcelable
+-keep class * implements android.os.Parcelable {
+    public static android.os.Parcelable$Creator *;
+}
+
+-keep class javax.** { *; }
+-keep class org.apache.** { *; }
+
+#-dontwarn **
+
+#-keep class de.greenrobot.** {*;}
+#-keep class com.mobsandgeeks.saripaar.** {*;}
+
+-keep class java.lang.annotation.** { *; }
+-keep interface java.lang.annotation.** { *; }
+
+-keep class android.annotation.** { *; }
+-keep interface android.annotation.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepnames interface com.fasterxml.jackson.** { *; }
+
+-dontwarn com.amazonaws.services.securitytoken.**
+-keep class org.apache.commons.logging.**               { *; }
+-keep class com.amazonaws.services.sqs.QueueUrlHandler  { *; }
+-keep class com.amazonaws.javax.xml.transform.sax.*     { public *; }
+-keep class com.amazonaws.javax.xml.stream.**           { *; }
+-keep class com.amazonaws.services.**.model.*Exception* { *; }
+-keep class com.amazonaws.internal.**              { *; }
+-keep class org.codehaus.**                             { *; }
+-keep class org.joda.convert.*                   { *; }
+-keepattributes Signature,*Annotation*,EnclosingMethod
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepnames class com.amazonaws.** { *; }
+
+-dontwarn com.amazonaws.auth.policy.conditions.S3ConditionFactory
+-dontwarn org.joda.time.**
+-dontwarn com.fasterxml.jackson.databind.**
+-dontwarn javax.xml.stream.events.**
+-dontwarn org.codehaus.jackson.**
+-dontwarn org.apache.commons.logging.impl.**
+-dontwarn org.apache.http.conn.scheme.**
+-dontwarn org.apache.http.annotation.**
+-dontwarn org.ietf.jgss.**
+-dontwarn org.w3c.dom.bootstrap.**
+-dontwarn android.support.v8.**
+# For CleverTap SDK
+-dontwarn com.clevertap.android.sdk.**
+
+-keep class net.sqlcipher.** {*;}
+
+# SSO library related classes
+-keep class org.apache.http. { *; }
+-dontwarn org.apache.http.**
+-dontwarn android.net.http.**
+-dontwarn com.android.volley.**
+-dontwarn android.util.**
+-keepattributes Signature
+-keepattributes *Annotation*
+
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+-optimizationpasses 5
+-allowaccessmodification
+-dontpreverify
+
+
+## Start Butterknife proguard
+# Retain generated class which implement Unbinder.
+-keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
+
+# Prevent obfuscation of types which use ButterKnife annotations since the simple name
+# is used to reflectively look up the generated ViewBinding.
+-keep class butterknife.*
+-keepclasseswithmembernames class * { @butterknife.* <methods>; }
+-keepclasseswithmembernames class * { @butterknife.* <fields>; }
+-keep class **$$ViewBinder { *; }
+##End Butterknife proguard
+#To whitelist MPAndroidChart, following is used
+-keep class com.github.mikephil.charting.** { *; }
+
+
+
+# jitsi
+
+ # okhttp
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+
+ # okio
+
+-keep class sun.misc.Unsafe { *; }
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-keep class okio.** { *; }
+-dontwarn okio.**
+
+ # WebRTC
+
+-keep class org.webrtc.** { *; }
+-dontwarn org.chromium.build.BuildHooksAndroid
+
+ # Jisti Meet SDK
+
+-keep class org.jitsi.meet.** { *; }
+-keep class org.jitsi.meet.sdk.** { *; }
+
+-keep class com.oney.WebRTCModule.** { *; }
+
+#JioMeet SDK start
+-assumenosideeffects class android.util.Log {
+  public static *** v(...);
+  public static *** d(...);
+  public static *** i(...);
+  public static *** w(...);
+  public static *** e(...);
+}
+
+-keepattributes *Annotation*
+#-keep @**annotation** class ** {*;}
+-keep class org.apache.http.* {*;}
+-dontwarn org.apache.http.**
+-keep class org.apache.harmony.** {*;}
+-dontwarn org.apache.harmony.**
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+-keep class com.sun.mail.imap.protocol.** {*;}
+-dontwarn com.sun.mail.imap.protocol.**
+-keep class okio.** {*;}
+-dontwarn okio.**
+-keep class com.squareup.okhttp.** {*;}
+-dontwarn com.squareup.okhttp.**
+-keep class javax.activation.** {*;}
+-dontwarn javax.activation.**
+-keep class com.vidyo.** { *; }
+-dontwarn com.vidyo.**
+-dontwarn org.json.**
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep class javax.** { *; }
+-keep class org.** { *; }
+-keep class org.jio.meet.common.customview.ProgressAnimDialog
+-keepclassmembers class org.jio.meet.common.customview.ProgressAnimDialog** {*;}
+-keepclassmembers class ** {
+    @com.squareup.otto.Subscribe public *;
+    @com.squareup.otto.Produce public *;
+}
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+#JioMeet SDK end
+
+
+
+
